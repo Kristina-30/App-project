@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load allauth i18n %}
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+{% block content %}
+    {% element h1 %}
+        <p class="text-3xl mb-8"> <b> {% trans "Sign Up" %} </b> </p>
+    {% endelement %}
+    <p>
+        {% blocktrans %}Already have an account? Then please 
+        <a href="{{ login_url }}"> <button class="bg-gray-200 text-gray-800 font-bold rounded border-b-2 border-gray-500 hover:border-gray-800 hover:bg-gray-400 hover:text-white shadow-md py-1 px-2 inline-flex items-center text-sm mt-4" type="submit">sign in </button></a>{% endblocktrans %}
+    </p>
+    {% url 'account_signup' as action_url %}
+    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+        {% slot body %}
+            {% csrf_token %}
+            {% element fields form=form unlabeled=True %}
+            {% endelement %}
+            {% if redirect_field_value %}
+                <input type="hidden"
+                       name="{{ redirect_field_name }}"
+                       value="{{ redirect_field_value }}" />
+            {% endif %}
+        {% endslot %}
+        {% slot actions %}
+            {% element button tags="prominent,signup" type="submit" %}
+                <button class="bg-gray-200 text-gray-800 font-bold rounded border-b-2 border-gray-500 hover:border-gray-800 hover:bg-gray-400 hover:text-white shadow-md py-1 px-2 inline-flex items-center text-sm mt-4" type="submit">
+                    {% trans "Sign Up" %}
+                </button>
+            {% endelement %}
+        {% endslot %}
+    {% endelement %}
+    {% if SOCIALACCOUNT_ENABLED %}
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+    {% endif %}
+{% endblock content %}
