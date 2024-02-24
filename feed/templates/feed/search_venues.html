@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    {% if user_name %}
+        <div class="py-10 text-center text-lg md:text-xl" style="font-size:20px;">You searched for: </div>
+            {% for username in usernames %}
+                <div class="text-center text-xl md:text-2xl" style="color:rgba(50, 25, 213, 0.5); font-size: 30px;"><b> <u> <a href = "{% url 'profiles:detail' username %}">{{ username}} </a> </u> </b> </div> <br/> 
+                {% empty %}
+                  <p style="text-align:center; font-size: 20px;"><b>  no results </b></p>
+            {% endfor %}
+    {% else %}
+        <h1> You forgot to search fo a venue </h1>
+    {% endif %}
+    
+{% endblock %}

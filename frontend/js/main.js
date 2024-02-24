@@ -92,3 +92,10 @@ $(document).on("click", ".js-toggle-modal", function(e){
         }
     });
 })
+
+
+
+
+
+
+

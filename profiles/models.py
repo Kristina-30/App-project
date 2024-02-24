@@ -11,7 +11,7 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         related_name="profile"
     )
-    image = ImageField(upload_to='profiles')
+    image = ImageField(upload_to='profiles', blank=True)
     def __str__(self):
         return self.user.username
 
@@ -20,3 +20,5 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Create a new Profile() object when a Django user is created"""
     if created:
         Profile.objects.create(user=instance)
+
+

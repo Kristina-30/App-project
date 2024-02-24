@@ -1,9 +1,28 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 
 {% block title %}Change the title of the homepage{% endblock %}
 
 {% block body %}
+    {% if request.user.is_authenticated %}
+     <div class="searchbar mb-8">
+            <form class="example" method="POST" action="{% url 'feed:search-venues' %}">
+            {% csrf_token %}
+                <input type="text" id="search" class="search" placeholder="Search profiles" name="user_name" style="border: 1px solid gray;">
+                    <button id="SearchButton" class="bg-gray-400 text-gray-800 content-center font-bold rounded border-b-2 border-pink-500 hover:border-pink-600 hover:bg-pink-400 hover:text-white shadow-md py-1 px-1 inline-flex items-center text-sm mt-6 js-sub" type="submit">
+                        Search
+                    </button>      
+            </form>
+    </div>
+    {% else %}
+        <div class="flex flex-col justify-between text-center">
+            <b><h1 class="text-3xl md:text-4xl text-center capitalize mb-10" style="color:rgb(52, 50, 50)">Welcome to TIL app</h1></b>
+            <div class="rounded-full">
+                <img src="https://img.freepik.com/free-vector/social-media-design-concept_1284-5151.jpg" alt="some" class=""style="border: 2px solid gray;">
+            </div>
+        </div>
+    {% endif %} 
     <div id="posts-container">
         {% for post in posts %}
             {% include "includes/post.html" with post=post show_detail_link=True %} <br>

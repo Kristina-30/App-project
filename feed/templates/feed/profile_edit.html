@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %} {{ user.username }} {% endblock %}
+
+{% block body %} 
+    <div class="container" style="background-color: #e8cd99;">
+        <i><form class="border-2" style="background-color: #e8cd99;" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <div class="flex flex-col flex items-center"> <button class="bg-gray-400 text-gray-800 content-center font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-400 hover:text-white shadow-md py-2 px-4 inline-flex items-center text-sm mt-6 mb-6" type="submit"> Submit </button> </div>
+        </form></i>
+    </div>
+        <div class="flex flex-col flex items-center border-2" style="background-color: rgb(219, 165, 165)"> 
+           <div> <button class="mx-auto bg-gray-400 text-gray-800 content-center font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-400 hover:text-white shadow-md py-2 px-6 inline-flex items-center text-sm mt-6" type="button"> <a href="{% url 'feed:change_password' %}" span class="mr-2 text-sm md:text-base"> Change Password </button> </div>
+
+           <div> <button class="mx-auto bg-gray-400 text-gray-800 content-center font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-green-400 hover:text-white shadow-md py-2 px-2 inline-flex items-center text-sm mt-6 mb-6" type="button"> <a href="{% url 'feed:change_image' %}" span class="mr-2 text-sm md:text-base"> Change Profile Image </button> </div>         
+        </div>
+        
+{% endblock %}

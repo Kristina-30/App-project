@@ -7,6 +7,8 @@ from feed.models import Post
 from followers.models import Follower
 
 
+
+
 class ProfileDetailView(DetailView):
     http_method_names = ["get"]
     template_name = "profiles/detail.html"
@@ -64,3 +66,7 @@ class FollowView(LoginRequiredMixin, View):
             'success' : "True",
             'wording' : "Unfollow" if data['action'] == "follow" else "Follow"
         })
+
+
+
+
